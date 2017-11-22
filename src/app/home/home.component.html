@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-md-3" *ngIf="dish">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{dish.name | uppercase}}</h3>
+			</div>
+			<div class="panel-body">
+				<img [src]="dish.image" alt="{{dish.name}}" class="img-responsive" style="max-height: 500px;">
+				<p>{{dish.description}}</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3" *ngIf="promotion">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{promotion.name | uppercase}}</h3>
+			</div>
+			<div class="panel-body">
+				<img [src]="promotion.image" alt="{{promotion.name}}" class="img-responsive" style="max-height: 500px;">
+				<p>{{promotion.description}}</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3" *ngIf="leader">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{leader.name | uppercase}}</h3>
+			</div>
+			<div class="panel-body">
+				<img [src]="leader.image" alt="{{leader.name}}" class="img-responsive" style="max-height: 500px;">
+				<p>{{leader.description}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+

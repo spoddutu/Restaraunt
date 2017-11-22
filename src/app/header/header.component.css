@@ -1,0 +1,10 @@
+.background-light {
+	background-color: #9575CD;
+}
+.background-pale {
+	background-color: #D1C4E9;
+}
+.background-dark {
+	background-color: #512DA8;
+	color: floralwhite !important;
+}
