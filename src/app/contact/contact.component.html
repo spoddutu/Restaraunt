@@ -40,12 +40,14 @@
               <div class="form-group">
                 <label for="firstName">First Name</label>
                 <input type="text" id="firstName" class="form-control" formControlName="firstname" required>
+                <span [hidden]="!formErrors.firstname">{{formErrors.firstname}}</span>
               </div>              
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label for="lastName">Last Name</label>
                 <input type="text" id="lastName" class="form-control" formControlName="lastname" required>
+                <span [hidden]="!formErrors.lastname">{{formErrors.lastname}}</span>
               </div>              
             </div>
           </div>
@@ -54,12 +56,14 @@
               <div class="form-group">
                 <label for="phone">Phone Number</label>
                 <input type="number" id="phone" class="form-control" formControlName="phone">
+                <span [hidden]="!formErrors.phone">{{formErrors.phone}}</span>
               </div>              
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" class="form-control" formControlName="email" required>
+                <span [hidden]="!formErrors.email">{{formErrors.email}}</span>
               </div>              
             </div>
           </div>
@@ -67,22 +71,17 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>
-                  <input type="checkbox" formControlName="agree"> May we contact you?
+                  <input type="checkbox" formControlName="agree" (change)="onChange()"> May we contact you?
                 </label>
               </div>              
             </div>
-            <div class="col-md-4">
-              <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  None
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" formControlName="contacttype">
-                  <li><a href="#">None</a></li>
-                  <li><a href="#">Email</a></li>
-                  <li><a href="#">Phone</a></li>
-                </ul>
-              </div>           
+            <div class="col-md-2">
+              <select class="form-control" formControlName="contacttype">
+                <option value="" [selected]="feedbackForm.controls.contacttype.value == null">--Select--</option>
+                <option value="none">None</option>
+                <option value="email">Email</option>
+                <option value="phone">Phone</option>
+              </select>
             </div>
           </div>
           <div class="row">
@@ -91,7 +90,7 @@
               <textarea id="comments" class="form-control" formControlName="comments" rows="6"></textarea>
             </div>
           </div>
-          <button type="Submit" class="btn btn-primary">Submit</button>
+          <button type="Submit" class="btn btn-primary" [disabled]="feedbackForm.invalid">Submit</button>
         </form>
       </div>
     </div>

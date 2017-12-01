@@ -5,13 +5,15 @@
 				<h3 class="panel-title">{{dish.name | uppercase}}</h3>
 			</div>
 			<div class="panel-body">
-				<img [src]="dish.image" alt="{{dish.name}}" class="img-responsive" style="max-height: 500px;">
+				<img src="{{baseURL + dish.image}}" alt="{{dish.name}}" class="img-responsive" style="max-height: 500px;">
 				<p>{{dish.description}}</p>
 			</div>
 			<div class="panel-footer">
+				<button class="btn btn-deafult" [routerLink]="['/dishdetail', getId(true)]">Prev</button>
 				<button class="btn btn-deafult" (click)="back()">Back</button>
 				<button class="btn btn-deafult">Like</button>
 				<button class="btn btn-deafult">Share</button>
+				<button class="btn btn-deafult" [routerLink]="['/dishdetail', getId(false)]">Next</button>
 			</div>
 		</div>
 	</div>
@@ -25,6 +27,29 @@
                  <footer>{{comment.author}}, {{comment.date | date:'MMM. dd, yyyy'}}</footer>
               </blockquote>
             </li>
-       	</ul>		
+       	</ul>
+       	<div *ngIf="commentForm.valid">
+       		<h4>Preview</h4>
+       		<p>Author: {{commentForm.controls.author.value}}</p>
+       		<p>Rating: {{commentForm.controls.rating.value}}</p>
+       		<p>Comment: {{commentForm.controls.comment.value}}</p>
+       	</div>
+       	<form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+       		<div class="form-group">
+       			<label for="author">Author</label>
+       			<input type="text" id="author" formControlName="author" class="form-control">
+       			<span [hidden]="!formErrors.author">{{formErrors.author}}</span>
+       		</div>
+       		<div class="form-group">
+       			<label for="slider">Rate</label>
+       			<input type="range" id="slider" formControlName="rating" min="0" max="5">
+       		</div>
+       		<div class="form-group">
+       			<label for="comments">Name</label>
+       			<textarea id="comments" formControlName="comment" class="form-control" rows="6"></textarea>
+       			<span [hidden]="!formErrors.comment">{{formErrors.comment}}</span>
+       		</div>
+       		<button type="Submit" class="btn btn-primary" [disabled]="commentForm.invalid">Submit</button>
+       	</form>		
 	</div>
 </div>

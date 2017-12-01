@@ -1,5 +1,6 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -20,6 +21,11 @@ import { MenuService } from './menu/menu.service';
 import { PromotionService } from './promotion.service';
 import { LeadershipService } from './leadership.service';
 import { LoginComponent } from './login/login.component';
+import { DropdownDirective } from './shared/dropdown.directive';
+
+import { CachingInterceptor } from './shared/caching.interceptor';
+import { baseURL } from './shared/baseurl';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -33,15 +39,24 @@ import { LoginComponent } from './login/login.component';
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    DropdownDirective,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [MenuService, PromotionService, LeadershipService],
+  providers: [
+    MenuService, 
+    PromotionService, 
+    LeadershipService,
+    // { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true },
+    { provide: 'BaseURL', useValue: baseURL}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
